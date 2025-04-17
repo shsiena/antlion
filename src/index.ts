@@ -13,7 +13,7 @@ interface RouteInfo {
     methods: Set<string>;
 }
 
-export function antlion(app: Application, options: RobotsGuardOptions = {}): void {
+export default function antlion(app: Application, options: RobotsGuardOptions = {}): void {
     const path = options.path || '/robots.txt';
     const { disallow = [], allowRoot = true, methods = ['all'] } = options;
     
@@ -47,47 +47,54 @@ export function antlion(app: Application, options: RobotsGuardOptions = {}): voi
             };
         }
     }
+
+    let cachedRobotsTxt: string | null = null;
     
     // Register the robots.txt route
     app.get(path, (req: Request, res: Response) => {
-        console.log('Registered routes:', Array.from(registeredRoutes.entries()).map(([path, info]) => ({
-            path,
-            methods: Array.from(info.methods)
-        })));
-        
-        const allowed = new Set<string>();
-        if (allowRoot) {
-            allowed.add('/');
-        }
+        console.log('/robots.txt requested.');
+        if (cachedRobotsTxt === null) {
+            console.log('Cached robots.txt not found, generating...');
+            console.log('Registered routes:', Array.from(registeredRoutes.entries()).map(([path, info]) => ({
+                path,
+                methods: Array.from(info.methods)
+            })));
+            const allowed = new Set<string>();
+            if (allowRoot) {
+                allowed.add('/');
+            }
 
-        for (const [routePath, routeInfo] of registeredRoutes.entries()) {
-            if (routePath === path) continue; // Skip the robots.txt path itself
+            for (const [routePath, routeInfo] of registeredRoutes.entries()) {
+                if (routePath === path) continue; // Skip the robots.txt path itself
 
-            let patternMatched = false;
+                let patternMatched = false;
 
-            for (const pattern of disallow) {
-                console.log(`pattern: ${pattern}, path: ${routePath}, minimatch: ${minimatch(routePath, pattern)}`);
-                if (minimatch(routePath, pattern)) {
-                    patternMatched = true;
-                    break;
+                for (const pattern of disallow) {
+                    console.log(`pattern: ${pattern}, path: ${routePath}, minimatch: ${minimatch(routePath, pattern)}`);
+                    if (minimatch(routePath, pattern)) {
+                        patternMatched = true;
+                        break;
+                    }
+                }
+
+                if (!patternMatched) {
+                    const pathWithWildcard = expressPathToWildcard(routePath);
+                    allowed.add(pathWithWildcard);
                 }
             }
+            
+            console.log('Allowed paths:', allowed);
+            
+            const txt = [
+                'User-agent: *',
+                'Disallow: /',
+                ...[...allowed].map(p => `Allow: ${p}`)
+            ].join('\n');
 
-            if (!patternMatched) {
-                const pathWithWildcard = expressPathToWildcard(routePath);
-                allowed.add(pathWithWildcard);
-            }
+            cachedRobotsTxt = txt;
         }
         
-        console.log('Allowed paths:', allowed);
-        
-        const txt = [
-            'User-agent: *',
-            'Disallow: /',
-            ...[...allowed].map(p => `Allow: ${p}`)
-        ].join('\n');
-        
-        res.type('text/plain').send(txt);
+        res.type('text/plain').send(cachedRobotsTxt);
     });
 }
 

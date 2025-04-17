@@ -1,5 +1,5 @@
 import express from 'express';
-import { antlion } from '../dist/index.js';
+import antlion from '../src/index';
 
 const app = express();
 const port = 3000;
