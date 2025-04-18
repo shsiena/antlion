@@ -20,17 +20,30 @@
   <div id="user-content-toc">
     <ul align="center" style="list-style: none;">
       <summary>
-        <h1><strong>Antlion</strong></h1>
-          <div />
-        <h3 align="center">
-          <i>Make yourself indigestible, grow spikes.</i>
-        </h3>
+        <div>
+          <h1><strong>Antlion</strong></h1>
+        </div>
+        <div>
+          <h3 align="center" style="margin-top: -10px;">
+            <i>Make yourself indigestible, grow spikes.</i>
+          </h3>
+        </div>
       </summary>
+<div align="center">
+  
+  [![Node.js][Node.js]][Node-url]
+  [![Express.js][Express.js]][Express-url]
+  [![TypeScript][TypeScript]][TypeScript-url]
+</div>
+        <a href="https://github.com/github_username/repo_name/issues/new?labels=bug&template=bug-report---.md">Report Bug </a>
+          ·
+        <a href="https://github.com/github_username/repo_name/issues/new?labels=enhancement&template=feature-request---.md"> Request Feature</a>
     </ul>
   </div>
 </div>
 
-<br />
+
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -59,7 +72,6 @@
 </details>
 
 
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -81,15 +93,10 @@ For too long, AI companies have been flagrantly disrespecting website owners by 
 <br />
 
 
-### Built With
-
-- [![Node.js][Node.js]][Node-url]
-- [![Express.js][Express.js]][Express-url]
-- [![TypeScript][TypeScript]][TypeScript-url]
-
-<br />
-
+<details>
+<summary><strong>Screenshot</strong></summary>
 <img src="https://github.com/user-attachments/assets/dcce2d99-dfb2-48b7-9ed8-3c980eb54436" width="900" height="400" />
+</details>
 
 
 <!-- GETTING STARTED -->
@@ -226,7 +233,7 @@ Project Link: [https://github.com/shsiena/Antlion](https://github.com/shsiena/An
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
-[Node.js]: https://img.shields.io/badge/Node.js-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white
+[Node.js]: https://img.shields.io/badge/Node-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white
 [Node-url]: https://nodejs.org/en
 [Express.js]: https://img.shields.io/badge/Express-090a0a?style=for-the-badge&logo=express&logoColor=white
 [Express-url]: https://https://expressjs.com
