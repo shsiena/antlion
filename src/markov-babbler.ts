@@ -8,6 +8,13 @@ function cleanString(input: string) {
         .join(' ');
 }
 
+function whitelistString(input: string): string {
+    const whitelist = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .,!?'"`;
+    const escaped = whitelist.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
+    const regex = new RegExp(`[^${escaped}]`, 'g');
+    return input.replace(regex, '');
+}
+
 export default class MarkovBabbler {
     private model: Map<string, string[]>;
     private order: number;
@@ -22,6 +29,7 @@ export default class MarkovBabbler {
         let raw: string;
         try {
             raw = fs.readFileSync(resolvePath(datasetFilePath), "utf-8");
+            raw = whitelistString(raw);
         } catch (err) {
             throw new Error(`Failed to read dataset at ${datasetFilePath}: ${err}`);
         }

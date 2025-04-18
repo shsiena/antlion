@@ -10,10 +10,10 @@ interface AntlionOptions {
   urlPath?: string;
 }
 
-const totalDelay = 5000;   // ms
-const chunkSize = 50;      // chars
+const totalDelay = 25000;   // ms
+const chunkSize = 150;      // chars
 const minBodyChars = 500;
-const maxBodyChars = 1000;
+const maxBodyChars = 750;
 const minTitleLength = 1;  // words
 const maxTitleLength = 7;  // words
 const numLinks = 8;
@@ -31,6 +31,9 @@ function generateRandomString() { // url safe
     return result;
 }
 
+function formatLinkText(input: string): string {
+  return input.replace(/[^a-zA-Z]/g, '').toLowerCase();
+}
 
 // initialize Markov Babbler
 const babbler = new MarkovBabbler(2);
@@ -54,8 +57,8 @@ function generatePage(trappedRoutes: Array<string>): Array<string> {
         const topLevelRoute = trappedRoutes[Math.floor(Math.random() * trappedRoutes.length)];
 
         let link: Link = {
-            text: bodyWordList[idx],
-            route: topLevelRoute + '/' + generateRandomString(),
+            text: formatLinkText(bodyWordList[idx]),
+            route: topLevelRoute + generateRandomString(),
         };
 
         return link;
@@ -142,9 +145,7 @@ export default function antlion(app: Application, options: AntlionOptions): void
 
 
     function dripLoadPage(req: Request, res: Response) {
-        console.log('drip start');
         const chunks: Array<string> = generatePage(parsedTrappedRoutes);
-        console.log('chunks:', chunks);
         const interval = totalDelay / chunks.length;
 
         res.setHeader('Content-Type', 'text/html; charset:utf-8');
@@ -152,7 +153,6 @@ export default function antlion(app: Application, options: AntlionOptions): void
         let i = 0;
         const sendChunk = () => {
             if (i < chunks.length) {
-                console.log('drip');
                 res.write(chunks[i]);
                 i++;
                 setTimeout(sendChunk, interval);
