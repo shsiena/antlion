@@ -13,22 +13,12 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="#">
-    <img src="logo.png" alt="Logo" width="100" height="100">
-  </a>
-
   <div id="user-content-toc">
     <ul align="center" style="list-style: none;">
-      <summary>
-        <div>
-          <h1><strong>Antlion</strong></h1>
-        </div>
-        <div>
+          <img src="https://github.com/user-attachments/assets/aaf10592-f40a-4ff1-8c21-f6bc145559fe" width="300" height="300"/>
           <h3 align="center" style="margin-top: -10px;">
             <i>Make yourself indigestible, grow spikes.</i>
           </h3>
-        </div>
-      </summary>
 <div align="center">
   
   [![Node.js][Node.js]][Node-url]
