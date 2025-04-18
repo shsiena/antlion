@@ -13,27 +13,24 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/shsiena/Antlion">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="#">
+    <img src="logo.png" alt="Logo" width="100" height="100">
   </a>
 
-<h3 align="center">Antlion</h3>
-
-  <p align="center">
-    project_description
-    <br />
-    <a href="https://github.com/shsiena/Antlion"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/shsiena/Antlion">NPM Package</a>
-    ·
-    <a href="https://github.com/shsiena/Antlion/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    ·
-    <a href="https://github.com/shsiena/Antlion/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
-  </p>
+  <div id="user-content-toc">
+    <ul align="center" style="list-style: none;">
+      <summary>
+        <h1>Antlion</h1>
+        <p align="center">
+          <i>Make yourself indigestible, grow spikes.</i>
+          <br />
+        </p>
+      </summary>
+    </ul>
+  </div>
 </div>
 
-
+<br />
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -67,6 +64,8 @@
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+ Antlion gives you the power to define dedicated unused base routes which become infinite tar pits designed to trap webscrapers. Antlion is an Express.js middleware package that automatically injects disallow entries for all trapped routes you select to your site's robots.txt to avoid ensnaring respectful bots. Once a 
 
 Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
 
