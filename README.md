@@ -20,11 +20,11 @@
   <div id="user-content-toc">
     <ul align="center" style="list-style: none;">
       <summary>
-        <h1>Antlion</h1>
-        <p align="center">
+        <h1><strong>Antlion</strong></h1>
+          <div />
+        <h3 align="center">
           <i>Make yourself indigestible, grow spikes.</i>
-          <br />
-        </p>
+        </h3>
       </summary>
     </ul>
   </div>
@@ -63,29 +63,33 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+For too long, AI companies have been flagrantly disrespecting website owners by ignoring their robots.txt and scraping everything on their site without permission. _**Antlion** gives you the power to fight back._
 
- Antlion gives you the power to define dedicated unused base routes which become infinite tar pits designed to trap webscrapers. Antlion is an Express.js middleware package that automatically injects disallow entries for all trapped routes you select to your site's robots.txt to avoid ensnaring respectful bots. Once a 
+**Antlion** is Express.js middleware that gives you the ability to set up dedicated routes on your site to become become infinitely recursive tar pits designed to trap webscrapers that ignore your `robots.txt` file. 
 
-Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
+- When malicious bots enter **Antlion**'s pit, they become locked in an infinitely deep site. Every child route of the trapped routes becomes a new randomly generated page of nonsense text (generated with a Markov Babbler), which loads at speeds comparable to a 1990's dial up connection. Once the bot waits for the text to finally load, they are presented with several links, each of which leads to another near-identical page with more junk data. 
+
+- Because most webscrapers are designed to recursively traverse an entire site, the become trapped an indefinite state of waiting and clicking links.
+
+- Best of all, _the data they collect actively poisons any LLM datasets._
+
+- **Antlion** also automatically manages your robots.txt, adding disallow entries for all trapped routes to ensure ethical bots and search engine indexers are not affected.
+
+- Adding **Antlion** to your site is incredibly easy, just install the npm package, give it some unused routes, point it to your existing `robots.txt`, and add a single hidden link somewhere on your site that leads into the pit. _**Antlion** will take care of the rest_.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+<br />
 
 
 ### Built With
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+- [![Node.js][Node.js]][Node-url]
+- [![Express.js][Express.js]][Express-url]
+- [![TypeScript][TypeScript]][TypeScript-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<br />
 
+<img src="https://github.com/user-attachments/assets/dcce2d99-dfb2-48b7-9ed8-3c980eb54436" width="900" height="400" />
 
 
 <!-- GETTING STARTED -->
@@ -222,19 +226,9 @@ Project Link: [https://github.com/shsiena/Antlion](https://github.com/shsiena/An
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+[Node.js]: https://img.shields.io/badge/Node.js-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white
+[Node-url]: https://nodejs.org/en
+[Express.js]: https://img.shields.io/badge/Express-090a0a?style=for-the-badge&logo=express&logoColor=white
+[Express-url]: https://https://expressjs.com
+[TypeScript]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
+[TypeScript-url]: https://www.typescriptlang.org/
