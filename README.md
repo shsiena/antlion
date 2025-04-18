@@ -17,7 +17,7 @@
     <ul align="center" style="list-style: none;">
           <img src="https://github.com/user-attachments/assets/aaf10592-f40a-4ff1-8c21-f6bc145559fe" width="300" height="300"/>
           <h3 align="center" style="margin-top: -10px;">
-            <i>Make yourself indigestible, grow spikes.</i>
+            <i>Become indigestible, grow spikes.</i>
           </h3>
 <div align="center">
   
