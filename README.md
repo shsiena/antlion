@@ -63,7 +63,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-For too long, AI companies have been flagrantly disrespecting website owners by ignoring their robots.txt and scraping everything on their site without permission. _**Antlion** gives you the power to fight back._
+For too long, AI companies have been flagrantly disrespecting website owners by ignoring their robots.txt and scraping everything on their site without permission. _Now, with **Antlion**, you can finally teach them a lesson._
 
 **Antlion** is Express.js middleware that gives you the ability to set up dedicated routes on your site to become become infinitely recursive tar pits designed to trap webscrapers that ignore your `robots.txt` file. 
 
