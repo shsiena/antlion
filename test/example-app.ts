@@ -6,9 +6,8 @@ const port = 3000;
 
 // Set up robots middleware at the beginning
 antlion(app, {
-    disallow: ['/admin/**', '/admin'],
-    allowRoot: true,
-    methods: ['get', 'post']  // Only track GET and POST routes
+    filePath: 'robots.txt',
+    trappedRoutes: ['/evil/', '/trap/'],
 });
 
 // Define routes with various HTTP methods

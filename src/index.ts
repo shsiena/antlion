@@ -1,112 +1,64 @@
-import { Application, Request, Response } from "express";
-import { minimatch } from 'minimatch';
+import { Application, Request, RequestHandler, Response } from "express";
+import fs from "fs";
+import { resolve as resolvePath} from "path";
 
-interface RobotsGuardOptions {
-    disallow?: string[];
-    allowRoot?: boolean;
-    path?: string;
-    methods?: string[];  // Optional array to specify which methods to track
+interface AntlionOptions {
+  filePath: string;
+  /** List of free routes to trap (e.g. ['/secret/', '/blog/']) to append as Disallow lines */
+  trappedRoutes?: string[];
+  urlPath?: string;
 }
 
-interface RouteInfo {
-    path: string;
-    methods: Set<string>;
-}
 
-export default function antlion(app: Application, options: RobotsGuardOptions = {}): void {
-    const path = options.path || '/robots.txt';
-    const { disallow = [], allowRoot = true, methods = ['all'] } = options;
-    
-    // Store routes with their methods
-    const registeredRoutes = new Map<string, RouteInfo>();
-    
-    // List of standard HTTP methods in Express
-    const httpMethods = ['get', 'post', 'put', 'delete', 'patch', 'options', 'head', 'all'];
-    const methodsToTrack = methods[0] === 'all' ? httpMethods : methods;
-    
-    // Override all HTTP method functions to track routes
-    for (const method of methodsToTrack) {
-        const originalMethod = app[method as keyof Application];
-        if (typeof originalMethod === 'function') {
-            app[method as keyof Application] = function(...args: any[]): any {
-                // If this is a route registration (not a settings get)
-                if (typeof args[0] === 'string' && typeof args[1] === 'function') {
-                    const routePath = args[0];
-                    
-                    // Get or create route info
-                    let routeInfo = registeredRoutes.get(routePath);
-                    if (!routeInfo) {
-                        routeInfo = { path: routePath, methods: new Set() };
-                        registeredRoutes.set(routePath, routeInfo);
-                    }
-                    
-                    // Add this method to the route
-                    routeInfo.methods.add(method.toUpperCase());
-                }
-                return originalMethod.apply(app, args);
-            };
-        }
+export default function antlion(app: Application, options: AntlionOptions): void {
+    if (!options.filePath) {
+        throw new Error("`filePath` option is required");
     }
 
-    let cachedRobotsTxt: string | null = null;
-    
-    // Register the robots.txt route
-    app.get(path, (req: Request, res: Response) => {
-        console.log('/robots.txt requested.');
-        if (cachedRobotsTxt === null) {
-            console.log('Cached robots.txt not found, generating...');
-            console.log('Registered routes:', Array.from(registeredRoutes.entries()).map(([path, info]) => ({
-                path,
-                methods: Array.from(info.methods)
-            })));
-            const allowed = new Set<string>();
-            if (allowRoot) {
-                allowed.add('/');
-            }
+    const servePath = options.urlPath || "/robots.txt";
+    const rawTrappedRoutes = options.trappedRoutes || [];
 
-            for (const [routePath, routeInfo] of registeredRoutes.entries()) {
-                if (routePath === path) continue; // Skip the robots.txt path itself
+    const disallows = rawTrappedRoutes.map(route => route.endsWith('/') ? route : route + '/');
 
-                let patternMatched = false;
+    let raw: string;
+    try {
+        raw = fs.readFileSync(resolvePath(options.filePath), "utf-8");
+    } catch (err) {
+        throw new Error(`Failed to read robots.txt at ${options.filePath}: ${err}`);
+    }
 
-                for (const pattern of disallow) {
-                    console.log(`pattern: ${pattern}, path: ${routePath}, minimatch: ${minimatch(routePath, pattern)}`);
-                    if (minimatch(routePath, pattern)) {
-                        patternMatched = true;
-                        break;
-                    }
-                }
+    raw = raw.replace(/\r\n?/g, '\n');
+    if (!raw.endsWith('\n')) {
+        raw += '\n';
+    }
 
-                if (!patternMatched) {
-                    const pathWithWildcard = expressPathToWildcard(routePath);
-                    allowed.add(pathWithWildcard);
-                }
-            }
-            
-            console.log('Allowed paths:', allowed);
-            
-            const txt = [
-                'User-agent: *',
-                'Disallow: /',
-                ...[...allowed].map(p => `Allow: ${p}`)
-            ].join('\n');
+    const lines = raw.split('\n');
+    const globalUserAgentLineIndex = lines.findIndex(l => /^User-agent:\s*\*\s*$/i.test(l));
 
-            cachedRobotsTxt = txt;
+    const disallowLines = disallows.map(endpoint => `Disallow: ${endpoint}`);
+
+    if (globalUserAgentLineIndex !== -1) {
+        let insertAt = globalUserAgentLineIndex + 1;
+        while (insertAt < lines.length && lines[insertAt].trim() !== '') {
+            insertAt++
         }
+
+        lines.splice(insertAt, 0, ...disallowLines);
+    } else {
+        // no wildcard user agent block, prepend one
         
-        res.type('text/plain').send(cachedRobotsTxt);
-    });
+        const block = ['User-agent: *', ...disallowLines, ''];
+        lines.unshift(...block);
+    }
+
+    const finalRobotsTxt = lines.join('\n');
+
+    console.log(`[antlion] Loaded robots.txt with ${disallows.length} injected trapped route${disallows.length !== 1 ? 's' : ''}`);
+
+    app.route(servePath)
+        .get((req: Request, res: Response) => {
+            res.type('text/plain').send(finalRobotsTxt);
+            console.log(`[antlion] Served trapped robots.txt`);
+        });
 }
 
-function expressPathToWildcard(path: string): string {
-    const segments = path.split('/');
-    const result: string[] = [];
-    for (const seg of segments) {
-        if (seg.startsWith(':')) {
-            result.push('*');
-        } else {
-            result.push(seg);
-        }
-    }
-    return result.join('/')
-}

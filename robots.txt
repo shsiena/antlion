@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /test/
+
+User-agent: googlebot
+Disallow: /shoes/
+
+User-agent: BingBot
+Disallow: /socks/
+
+Sitemap: https://www.example.com/sitemap.xml
