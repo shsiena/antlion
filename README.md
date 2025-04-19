@@ -41,16 +41,9 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
+      <a href="#installation">Installation</a>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -64,18 +57,24 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+<div align="left">
 
-For too long, AI companies have been flagrantly disrespecting website owners by ignoring their robots.txt and scraping everything on their site without permission. _Now, with **Antlion**, you can finally fight back._
+[![NPM Version][npm-version-image]][npm-url]
+[![NPM Downloads][npm-downloads-image]][npm-downloads-url]
+</div>
+
+For too long, AI companies have been flagrantly disrespecting website owners by ignoring their robots.txt and scraping everything on their site without permission. _With **Antlion**, you can fight back._
 
 **Antlion** is Express.js middleware that gives you the ability to set up dedicated routes on your site to become infinitely recursive tar pits designed to trap webscrapers that ignore your `robots.txt` file. 
 
-- When malicious bots ignore your `robots.txt` and enter **Antlion**'s pit, they become locked in an infinitely deep site. Every child route of the trapped routes becomes a new randomly generated page of nonsense text, which loads at speeds comparable to a 1990's dial up connection. Once the bot waits for the text to finally load, they are presented with several links, each of which leads to another near-identical page with more junk data. 
 
-- **Antlion** also automatically manages your robots.txt, adding disallow entries for all trapped routes to ensure ethical bots and search engine indexers are not affected.
+### Features
+- Bots that ignore your site's `robots.txt` and enter **Antlion**'s pit are locked in an infinitely deep site full of nonsensical garbled text which loads at the speed of a '90s dial-up connection.
+- Once bots wait upwards of 20 seconds for a page to finally load, they are presented with several links, each of which leads deeper into **Antlion**'s pit. 
 
-- Because most webscrapers are designed to recursively traverse an entire site, the bots become trapped an indefinite state of waiting and clicking links, all while the bot's operator pays the power bill.
+- **Antlion** also automatically handles your robots.txt, adding disallow entries for all trapped routes to ensure ethical bots and search engine indexers are not affected without any additional overhead.
 
-- Additionally, any of these malicious webscrapers building up datasets for training LLMs with will inadvertently digest thousands to millions of lines of useless text, ideally forcing them to reconsider ignoring the rules in your sacred `robots.txt`, _lest they ingest **Antlion**'s poison._
+- Any malicious webscrapers gathering data to compile datasets for training LLMs will inadvertently digest millions of lines of useless text, ruining the output of models trained with this data, ideally making bot owners think twice before ignoring the rules in your sacred `robots.txt`.
 
 - Adding **Antlion** to your site is incredibly easy, just install the npm package, give it some unused routes, point it to your existing `robots.txt`, and add a single hidden link somewhere on your site that leads into the pit. _**Antlion** will take care of the rest_.
 
@@ -89,51 +88,57 @@ For too long, AI companies have been flagrantly disrespecting website owners by 
 </details>
 
 
-<!-- GETTING STARTED -->
-## Getting Started
+## Installation
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/).
 
-### Prerequisites
+Before installing, [download and install Node.js](https://nodejs.org/en/download/).
+Node.js 18 or higher is required.
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+If this is a brand new project, make sure to create a `package.json` first with
+the [`npm init` command](https://docs.npmjs.com/creating-a-package-json-file).
 
-### Installation
+Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-5. Change git remote url to avoid accidental pushes to base project
-   ```sh
-   git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
-   ```
-
+```bash
+npm install antlion
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+1. Create a file `training-data.txt`, and fill it with as much text as you can. This can be Wikipedia articles, blog posts, textbooks, or even Shakespeare. _Do not worry about formatting or special characters._
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+3. Choose a couple routes that you are not/do not plan on using, such as `/blog/`, `/docs/installation/` or `/aboutus/detailed/`. These can be anything, but the more realistic they are, the better.
+
+4. Remove any existing handlers for `/robots.txt`.
+
+5. Import Antlion and add it to your server middleware:
+```js
+import express from 'express'
+import antlion from 'antlion'
+
+const app = express()
+
+antlion(app, {
+    robotsPath: 'robots.txt',                 // path to your existing robots.txt from your project root
+    trainingDataPath: 'training-data.txt',    // path to your training data file from project root
+    trappedRoutes: ['/example/', '/trap/']    // array of the routes to trap
+})
+
+// -- rest of your code --
+```
+
+6. Hide a link into **Antlion**'s pit somewhere on your site, ideally hidden so regular users will not notice it.
+   - This trapped link should be one of the trapped routes, optionally followed by random text.
+   - Ex: `/trap/abcdef`, or just `/trap`
+
+_NOTE: To avoid strain on your server, Antlion can be installed on another webserver, and linked to from your main site._
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -142,10 +147,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Dynamic HTML to evade detection
+- [ ] Bot IP address tracking/logging
+- [ ] Text generation model caching for faster startup
 
 See the [open issues](https://github.com/shsiena/antlion/issues) for a full list of proposed features (and known issues).
 
@@ -157,6 +161,23 @@ See the [open issues](https://github.com/shsiena/antlion/issues) for a full list
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+### Setup
+Clone the repository:
+```bash
+git clone https://github.com/shsiena/antlion.git
+```
+
+Install dependencies:
+```bash
+cd antlion
+npm install
+```
+
+Run test server:
+```bash
+npm run dev
+```
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
@@ -180,7 +201,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the project_license. See `LICENSE.txt` for more information.
+Distributed under the MIT licence. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -200,9 +221,9 @@ Project Link: [https://github.com/shsiena/antlion](https://github.com/shsiena/an
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* Inspired by:
+  -  [Nepenthes](https://zadzmo.org/code/nepenthes) - "Aaron B." (pseudonym)
+  -  [Nightshade](https://nightshade.cs.uchicago.edu/whatis.html) - [@TheGlazeProject](https://twitter.com/theglazeproject)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -229,3 +250,8 @@ Project Link: [https://github.com/shsiena/antlion](https://github.com/shsiena/an
 [Express-url]: https://https://expressjs.com
 [TypeScript]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
+
+[npm-downloads-image]: https://badgen.net/npm/dm/antlion
+[npm-downloads-url]: https://npmcharts.com/compare/antlion?minimal=true
+[npm-url]: https://npmjs.org/package/antlion
+[npm-version-image]: https://badgen.net/npm/v/antlion
