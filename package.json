@@ -1,6 +1,14 @@
 {
   "name": "antlion",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shsiena/antlion.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shsiena/antlion/issues"
+  },
+  "homepage": "https://github.com/shsiena/antlion#README",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "files": [
@@ -8,6 +16,10 @@
     "README.md",
     "LICENSE"
   ],
+  "engines": {
+    "node": ">=18"
+  },
+  "prepublishOnly": "npm run build",
   "scripts": {
     "build": "tsc",
     "start": "node dist/test/example-app.js",
@@ -25,7 +37,7 @@
   ],
   "author": "Simon Siena",
   "license": "MIT",
-  "description": "Express.js middleware that turns your website into a dangerous poison pill for unethical webscraping bots.",
+  "description": "Express.js middleware that turns your website into an infinite sinkhole for unethical webscraping bots.",
   "devDependencies": {
     "@types/express": "^5.0.1",
     "express": "^5.1.0",
