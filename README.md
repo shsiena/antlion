@@ -78,7 +78,7 @@ For too long, AI companies have been flagrantly disrespecting website owners by 
 
 - Any malicious webscrapers gathering data to compile datasets for training LLMs will inadvertently digest millions of lines of useless text, ruining the output of models trained with this data, ideally making bot owners think twice before ignoring the rules in your sacred `robots.txt`.
 
-- Adding **Antlion** to your site is incredibly easy, just install the npm package, give it some unused routes, point it to your existing `robots.txt`, and add a single hidden link somewhere on your site that leads into the pit. _**Antlion** will take care of the rest_.
+- Adding **Antlion** to your site is incredibly easy, just install the npm package, give it some unused routes, point it to your existing `robots.txt`, copy and paste a bunch of random text into a file, and add a single hidden link somewhere on your site that leads into the pit. _**Antlion** will take care of the rest_.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 <br />
