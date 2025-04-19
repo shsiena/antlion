@@ -71,7 +71,7 @@ For too long, AI companies have been flagrantly disrespecting website owners by 
 
 - When malicious bots ignore your `robots.txt` and enter **Antlion**'s pit, they become locked in an infinitely deep site. Every child route of the trapped routes becomes a new randomly generated page of nonsense text, which loads at speeds comparable to a 1990's dial up connection. Once the bot waits for the text to finally load, they are presented with several links, each of which leads to another near-identical page with more junk data. 
 
-- Because most webscrapers are designed to recursively traverse an entire site, the become trapped an indefinite state of waiting and clicking links, all while the bot's operator pays the power bill.
+- Because most webscrapers are designed to recursively traverse an entire site, the bots become trapped an indefinite state of waiting and clicking links, all while the bot's operator pays the power bill.
 
 - Best of all, _the data they collect actively poisons any LLM datasets._
 
