@@ -147,7 +147,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [ ] Feature 3
     - [ ] Nested Feature
 
-See the [open issues](https://github.com/shsiena/Antlion/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/shsiena/antlion/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -171,8 +171,8 @@ Don't forget to give the project a star! Thanks again!
 
 ### Top contributors:
 
-<a href="https://github.com/shsiena/Antlion/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=shsiena/Antlion" alt="contrib.rocks image" />
+<a href="https://github.com/shsiena/antlion/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=shsiena/antlion" alt="contrib.rocks image" />
 </a>
 
 
@@ -191,7 +191,7 @@ Distributed under the project_license. See `LICENSE.txt` for more information.
 
 Simon Siena - ssiena@uwaterloo.ca
 
-Project Link: [https://github.com/shsiena/Antlion](https://github.com/shsiena/Antlion)
+Project Link: [https://github.com/shsiena/antlion](https://github.com/shsiena/antlion)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -210,16 +210,16 @@ Project Link: [https://github.com/shsiena/Antlion](https://github.com/shsiena/An
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/shsiena/Antlion.svg?style=for-the-badge
-[contributors-url]: https://github.com/shsiena/Antlion/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/shsiena/Antlion.svg?style=for-the-badge
-[forks-url]: https://github.com/shsiena/Antlion/network/members
-[stars-shield]: https://img.shields.io/github/stars/shsiena/Antlion.svg?style=for-the-badge
-[stars-url]: https://github.com/shsiena/Antlion/stargazers
-[issues-shield]: https://img.shields.io/github/issues/shsiena/Antlion.svg?style=for-the-badge
-[issues-url]: https://github.com/shsiena/Antlion/issues
-[license-shield]: https://img.shields.io/github/license/shsiena/Antlion.svg?style=for-the-badge
-[license-url]: https://github.com/shsiena/Antlion/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/shsiena/antlion.svg?style=for-the-badge
+[contributors-url]: https://github.com/shsiena/antlion/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/shsiena/antlion.svg?style=for-the-badge
+[forks-url]: https://github.com/shsiena/antlion/network/members
+[stars-shield]: https://img.shields.io/github/stars/shsiena/antlion.svg?style=for-the-badge
+[stars-url]: https://github.com/shsiena/antlion/stargazers
+[issues-shield]: https://img.shields.io/github/issues/shsiena/antlion.svg?style=for-the-badge
+[issues-url]: https://github.com/shsiena/antlion/issues
+[license-shield]: https://img.shields.io/github/license/shsiena/antlion.svg?style=for-the-badge
+[license-url]: https://github.com/shsiena/antlion/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
