@@ -1,3 +1,8 @@
+/*
+ * @license MIT
+ * Copyright (c) 2025 Simon Siena <ssiena@uwaterloo.ca>
+*/
+
 import fs from "fs";
 import { resolve as resolvePath} from "path";
 

@@ -6,8 +6,9 @@ const port = 3000;
 
 // Set up robots middleware at the beginning
 antlion(app, {
-    filePath: 'robots.txt',
-    trappedRoutes: ['/evil/', '/trap/'],
+    robotsPath: 'robots.txt',
+    trappedRoutes: ['/evil/', '/trap/', '/tarpit/testing/'],
+    trainingDataPath: 'training-data.txt'
 });
 
 // Define routes with various HTTP methods

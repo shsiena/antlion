@@ -1,14 +1,13 @@
-import { Application, Request, RequestHandler, Response } from "express";
-import fs from "fs";
-import { resolve as resolvePath} from "path";
-import MarkovBabbler from "./markov-babbler";
+/*
+ * @license MIT
+ * Copyright (c) 2025 Simon Siena <ssiena@uwaterloo.ca>
+*/
 
-interface AntlionOptions {
-  filePath: string;
-  /** List of free routes to trap (e.g. ['/secret/', '/blog/']) to append as Disallow lines */
-  trappedRoutes?: string[];
-  urlPath?: string;
-}
+
+import { Application, Request, Response } from "express";
+import fs from "fs";
+import path from "path";
+import MarkovBabbler from "./markov-babbler";
 
 const totalDelay = 25000;   // ms
 const chunkSize = 150;      // chars
@@ -20,6 +19,8 @@ const numLinks = 8;
 
 const randomRouteMinLength = 15 // chars
 const randomRouteMaxLength = 50 // chars
+
+let totalPoisonedPages = 0;
 
 function generateRandomString() { // url safe
     const chars = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-~`;
@@ -37,7 +38,6 @@ function formatLinkText(input: string): string {
 
 // initialize Markov Babbler
 const babbler = new MarkovBabbler(2);
-babbler.train('training-data.txt');
 
 type Link = { text: string, route: string };
 
@@ -95,22 +95,41 @@ function generatePage(trappedRoutes: Array<string>): Array<string> {
     return chunks;
 }
 
+interface AntlionOptions {
+  robotsPath: string;
+  trainingDataPath: string;
+  /** List of free routes to trap (e.g. ['/secret/', '/blog/']) to append as Disallow lines */
+  trappedRoutes: string[];
+}
 
 export default function antlion(app: Application, options: AntlionOptions): void {
-    if (!options.filePath) {
-        throw new Error("`filePath` option is required");
+    if (!options.robotsPath) {
+        throw new Error(`[antlion] robotsPath parameter cannot be empty`);
     }
 
-    const servePath = options.urlPath || "/robots.txt";
-    const rawTrappedRoutes = options.trappedRoutes || [];
+    if (!options.trainingDataPath) {
+        throw new Error(`[antlion] trainingDataPath parameter cannot be empty`);
+    }
 
-    const parsedTrappedRoutes = rawTrappedRoutes.map(route => route.endsWith('/') ? route : route + '/');
+    if (options.trappedRoutes.length < 1) {
+        throw new Error(`[antlion] At least one trapped route must be provided`);
+    }
+
+    const robotsPath = path.resolve(process.cwd(), options.robotsPath);
+    const trainingDataPath = path.resolve(process.cwd(), options.trainingDataPath);
+
+    babbler.train(trainingDataPath);
+
+    const servePath = "/robots.txt";
+
+    const parsedTrappedRoutes = options.trappedRoutes.map(route => route.endsWith('/') ? route : route + '/');
+    // console.log('parsedTrappedRoutes:', parsedTrappedRoutes, 'rawTrappedRoutes:', rawTrappedRoutes);
 
     let raw: string;
     try {
-        raw = fs.readFileSync(resolvePath(options.filePath), "utf-8");
+        raw = fs.readFileSync(path.resolve(robotsPath), "utf-8");
     } catch (err) {
-        throw new Error(`Failed to read robots.txt at ${options.filePath}: ${err}`);
+        throw new Error(`[antlion] Failed to read robots.txt at ${robotsPath}: ${err}`);
     }
 
     raw = raw.replace(/\r\n?/g, '\n');
@@ -132,7 +151,6 @@ export default function antlion(app: Application, options: AntlionOptions): void
         lines.splice(insertAt, 0, ...disallowLines);
     } else {
         // no wildcard user agent block, prepend one
-        
         const block = ['User-agent: *', ...disallowLines, ''];
         lines.unshift(...block);
     }
@@ -143,8 +161,9 @@ export default function antlion(app: Application, options: AntlionOptions): void
 
     console.log(`[antlion] Loaded robots.txt with ${count} injected trapped route${count !== 1 ? 's' : ''}`);
 
-
-    function dripLoadPage(req: Request, res: Response) {
+    function dripLoadPage(_req: Request, res: Response) {
+        totalPoisonedPages++;
+        console.log(`[antlion] Serving poisoned page, total poisoned pages served: ${totalPoisonedPages}`);
         const chunks: Array<string> = generatePage(parsedTrappedRoutes);
         const interval = totalDelay / chunks.length;
 
@@ -163,14 +182,10 @@ export default function antlion(app: Application, options: AntlionOptions): void
         sendChunk();
     }
 
-
     // -- tar pit route handlers --
     parsedTrappedRoutes.forEach(route => {
         const safeRoute = route.replace(/\/+$/, ''); //remove trailing slashes for regex
-        console.log(`safeRoute: ${safeRoute}`)
-
         app.use(safeRoute, dripLoadPage);
-
         app.use(safeRoute + '/*route', dripLoadPage);
     });
 
@@ -180,4 +195,3 @@ export default function antlion(app: Application, options: AntlionOptions): void
             console.log(`[antlion] Served trapped robots.txt`);
         });
 }
-
