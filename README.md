@@ -71,11 +71,11 @@ For too long, AI companies have been flagrantly disrespecting website owners by 
 
 - When malicious bots ignore your `robots.txt` and enter **Antlion**'s pit, they become locked in an infinitely deep site. Every child route of the trapped routes becomes a new randomly generated page of nonsense text, which loads at speeds comparable to a 1990's dial up connection. Once the bot waits for the text to finally load, they are presented with several links, each of which leads to another near-identical page with more junk data. 
 
+- **Antlion** also automatically manages your robots.txt, adding disallow entries for all trapped routes to ensure ethical bots and search engine indexers are not affected.
+
 - Because most webscrapers are designed to recursively traverse an entire site, the bots become trapped an indefinite state of waiting and clicking links, all while the bot's operator pays the power bill.
 
-- Best of all, _the data they collect actively poisons any LLM datasets._
-
-- **Antlion** also automatically manages your robots.txt, adding disallow entries for all trapped routes to ensure ethical bots and search engine indexers are not affected.
+- Additionally, any of these malicious webscrapers building up datasets for training LLMs with will inadvertently digest thousands to millions of lines of useless text, ideally forcing them to reconsider ignoring the rules in your sacred `robots.txt`, _lest they ingest **Antlion**'s poison._
 
 - Adding **Antlion** to your site is incredibly easy, just install the npm package, give it some unused routes, point it to your existing `robots.txt`, and add a single hidden link somewhere on your site that leads into the pit. _**Antlion** will take care of the rest_.
 
