@@ -207,8 +207,6 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the MIT licence. See `LICENSE` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTACT -->
@@ -217,9 +215,6 @@ Distributed under the MIT licence. See `LICENSE` for more information.
 Simon Siena - ssiena@uwaterloo.ca
 
 Project Link: [https://github.com/shsiena/antlion](https://github.com/shsiena/antlion)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- ACKNOWLEDGMENTS -->
