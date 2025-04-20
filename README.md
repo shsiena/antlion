@@ -15,7 +15,7 @@
 <div align="center">
   <div id="user-content-toc">
     <ul align="center" style="list-style: none;">
-          <img src="logo.png" width="300" height="300"/>
+          <img src="logo.jpg" width="300" height="300"/>
           <h3 align="center" style="margin-top: -10px;">
             <i>Become indigestible, grow spikes.</i>
           </h3>
