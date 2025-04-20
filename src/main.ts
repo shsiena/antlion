@@ -3,7 +3,6 @@
  * Copyright (c) 2025 Simon Siena <ssiena@uwaterloo.ca>
 */
 
-
 import { Application, Request, Response } from "express";
 import fs from "fs";
 import path from "path";
@@ -22,7 +21,7 @@ const randomRouteMaxLength = 50 // chars
 
 let totalPoisonedPages = 0;
 
-function generateRandomString() { // url safe
+export function generateRandomString() { // url safe
     const chars = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-~`;
     const length = Math.floor(Math.random() * (randomRouteMaxLength - randomRouteMinLength)) + randomRouteMinLength;
     let result = '';
@@ -32,17 +31,17 @@ function generateRandomString() { // url safe
     return result;
 }
 
-function formatLinkText(input: string): string {
+export function formatLinkText(input: string): string {
   return input.replace(/[^a-zA-Z]/g, '').toLowerCase();
 }
 
 // initialize Markov Babbler
 const babbler = new MarkovBabbler(2);
 
-type Link = { text: string, route: string };
+export type Link = { text: string, route: string };
 
 // no trailing slash in trappedRoutes
-function generatePage(trappedRoutes: Array<string>): Array<string> {
+export function generatePage(trappedRoutes: Array<string>): Array<string> {
     let bodyWordList = babbler.generate(minBodyChars, maxBodyChars);
     
     const titleLength = Math.floor(Math.random() * (maxTitleLength - minTitleLength)) + minTitleLength;
@@ -95,7 +94,7 @@ function generatePage(trappedRoutes: Array<string>): Array<string> {
     return chunks;
 }
 
-interface AntlionOptions {
+export interface AntlionOptions {
   robotsPath: string;
   trainingDataPath: string;
   /** List of free routes to trap (e.g. ['/secret/', '/blog/']) to append as Disallow lines */

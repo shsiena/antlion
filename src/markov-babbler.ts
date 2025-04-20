@@ -6,14 +6,14 @@
 import fs from "fs";
 import { resolve as resolvePath} from "path";
 
-function cleanString(input: string) {
+export function cleanString(input: string) {
     return input
         .split(/\r?\n/)
         .filter((line: string) => line.trim() !== '')
         .join(' ');
 }
 
-function whitelistString(input: string): string {
+export function whitelistString(input: string): string {
     const whitelist = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .,!?'"`;
     const escaped = whitelist.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
     const regex = new RegExp(`[^${escaped}]`, 'g');
@@ -41,6 +41,10 @@ export default class MarkovBabbler {
 
         const words = cleanString(raw).split(/\s+/);
 
+        if (words.length < 100) {
+            throw new Error(`Dataset must be larger than 100 words. Current length: ${words.length}`);
+        }
+
         for (let i = 0; i < words.length - this.order; i++) {
             const key = words.slice(i, i + this.order).join(' ');
             const nextWord = words[i + this.order];
@@ -52,15 +56,27 @@ export default class MarkovBabbler {
     }
 
     generate(minWords: number = 500, maxWords: number = 1000): string[] {
+
+        if (minWords > maxWords) {
+            throw new Error('minWords cannot be greater than maxWords');
+        }
+
         const keys = Array.from(this.model.keys());
-        let currentKey = keys[Math.floor(Math.random() * keys.length)];
+        let currentKey = keys[Math.floor(Math.random() * (keys.length - 1))];
+
         let output: string[] = currentKey.split(' ');
 
         while (output.length < maxWords) {
             const nextWords = this.model.get(currentKey);
             if (!nextWords || nextWords.length === 0) {
-                break;
+                if (output.length >= minWords) {
+                    return output;
+                } else {
+                    currentKey = keys[Math.floor(Math.random() * (keys.length - 1))];
+                    continue;
+                }
             }
+
             const nextWord = nextWords[Math.floor(Math.random() * nextWords.length)];
             output.push(nextWord);
 
@@ -68,6 +84,6 @@ export default class MarkovBabbler {
             currentKey = nextKey;
         }
 
-        return output.length >= minWords ? output : this.generate(minWords, maxWords);
+        return output;
     }
 }
