@@ -57,13 +57,13 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<!--
+
 <div align="left">
 
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-downloads-url]
 </div>
--->
+
 
 For too long, AI companies have been flagrantly disrespecting website owners by ignoring their robots.txt and scraping everything on their site without permission. _With **Antlion**, you can fight back._
 
