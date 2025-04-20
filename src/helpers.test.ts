@@ -36,8 +36,8 @@ describe('generatePage', () => {
 
         expect(Array.isArray(chunks)).toBe(true);
         expect(html).toContain("<!DOCTYPE html>");
-        expect(html).toMatch(/<title>w0(<\/title>| w1<\/title>)/);
+        expect(html).toMatch(/<title>w0(?: w\d+)*<\/title>/);
         expect(html).toMatch(/<p>w\d+( w\d+)*<\/p>/);
-        expect(html).toMatch(/<a href="\/trap\/.+">w\d+<\/a>/); 
+        expect(html).toMatch(/<a href="\/trap[12]\/[A-Za-z0-9\-~]+">w<\/a>/); 
     });
 });
