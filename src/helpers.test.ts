@@ -1,4 +1,15 @@
-import { describe, expect, it } from "@jest/globals";
+import { describe, expect, it, jest } from "@jest/globals";
+import MarkovBabbler from "./markov-babbler";
+
+jest.spyOn(MarkovBabbler.prototype, 'generate')
+    .mockImplementation((minWords?: number, maxWords?: number) => {
+        const arr: string[] = [];
+        for (let i = 0; i < minWords!; i++) {
+            arr.push(`w${i}`);
+        }
+        return arr;
+    });
+
 import { generateRandomString, formatLinkText, generatePage } from "./main";
 
 describe('generateRandomString', () => {
@@ -21,12 +32,12 @@ describe('generatePage', () => {
     it('returns array of chunked HTML', () => {
         const mockRoutes = ['/trap1/', '/trap2/'];
         const chunks = generatePage(mockRoutes);
-        const fullHTML = chunks.join('');
+        const html = chunks.join('');
 
         expect(Array.isArray(chunks)).toBe(true);
-        expect(fullHTML).toMatch(/<!DOCTYPE html>/);
-        expect(fullHTML).toMatch(/<a href="\/trap[12]\/[A-Za-z\-~]+">/);
-        expect(fullHTML).toMatch(/<p>.*<\/p>/);
-        expect(chunks.length).toBeGreaterThan(1);
+        expect(html).toContain("<!DOCTYPE html>");
+        expect(html).toMatch(/<title>w0(<\/title>| w1<\/title>)/);
+        expect(html).toMatch(/<p>w\d+( w\d+)*<\/p>/);
+        expect(html).toMatch(/<a href="\/trap\/.+">w\d+<\/a>/); 
     });
 });
