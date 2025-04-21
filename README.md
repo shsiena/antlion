@@ -111,7 +111,7 @@ npm install antlion
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-1. Create a file `training-data.txt`, and fill it with as much text as you can. This can be Wikipedia articles, blog posts, textbooks, or even Shakespeare. _Do not worry about formatting or special characters._
+1. Create a file `bait.txt` _(suggested name)_, and fill it with as much text as you can. This can be Wikipedia articles, blog posts, textbooks, or even Shakespeare. _Do not worry about formatting or special characters._
 
 3. Choose a couple routes that you are not/do not plan on using, such as `/blog/`, `/docs/installation/` or `/aboutus/detailed/`. These can be anything, but the more realistic they are, the better.
 
@@ -125,9 +125,9 @@ import antlion from 'antlion'
 const app = express()
 
 antlion(app, {
-    robotsPath: 'robots.txt',                 // path to your existing robots.txt from your project root
-    trainingDataPath: 'training-data.txt',    // path to your training data file from project root
-    trappedRoutes: ['/example/', '/trap/']    // array of the routes to trap
+    robotsPath: 'robots.txt',                 // path to existing robots.txt from project root
+    trainingDataPath: 'bait.txt',             // path to training data file from project root
+    trappedRoutes: ['/example/', '/trap/']    // array of routes to trap
 })
 
 // -- rest of your code --
@@ -244,7 +244,7 @@ _Inspired by:_
 [Node.js]: https://img.shields.io/badge/Node-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white
 [Node-url]: https://nodejs.org/en
 [Express.js]: https://img.shields.io/badge/Express-090a0a?style=for-the-badge&logo=express&logoColor=white
-[Express-url]: https://https://expressjs.com
+[Express-url]: https://expressjs.com
 [TypeScript]: https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
 
