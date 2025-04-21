@@ -220,7 +220,7 @@ Project Link: [https://github.com/shsiena/antlion](https://github.com/shsiena/an
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* Inspired by:
+_Inspired by:_
   -  [Nepenthes](https://zadzmo.org/code/nepenthes) - "Aaron B." (pseudonym)
   -  [Nightshade](https://nightshade.cs.uchicago.edu/whatis.html) - [@TheGlazeProject](https://twitter.com/theglazeproject)
 
