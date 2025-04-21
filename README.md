@@ -13,22 +13,20 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <div id="user-content-toc">
-    <ul align="center" style="list-style: none;">
-          <img src="logo.jpg" width="300" height="300"/>
-          <h3 align="center" style="margin-top: -10px;">
-            <i>Become indigestible, grow spikes.</i>
-          </h3>
-<div align="center">
+  <div align="center" style="list-style: none;">
+    <img src="logo.jpg" width="300" height="300"/>
+    <h3 align="center" style="margin-top: -10px;">
+      <i>Become indigestible, grow spikes.</i>
+    </h3>
+    <div align="center">
   
   [![Node.js][Node.js]][Node-url]
   [![Express.js][Express.js]][Express-url]
   [![TypeScript][TypeScript]][TypeScript-url]
-</div>
-        <a href="https://github.com/shsiena/antlion/issues/new?labels=bug&template=bug-report---.md">Report Bug </a>
-          ·
-        <a href="https://github.com/shsiena/antlion/issues/new?labels=enhancement&template=feature-request---.md"> Request Feature</a>
-    </ul>
+    </div>
+    <a href="https://github.com/shsiena/antlion/issues/new?labels=bug&template=bug-report---.md">Report Bug </a>
+      ·
+    <a href="https://github.com/shsiena/antlion/issues/new?labels=enhancement&template=feature-request---.md"> Request Feature</a>
   </div>
 </div>
 
