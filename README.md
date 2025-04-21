@@ -99,8 +99,8 @@ Node.js 18 or higher is required.
 If this is a brand new project, make sure to create a `package.json` first with
 the [`npm init` command](https://docs.npmjs.com/creating-a-package-json-file).
 
-Installation is done using the
-[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+Install it with the
+[`npm install`](https://docs.npmjs.com/getting-started/installing-npm-packages-locally) command:
 
 ```bash
 npm install antlion
@@ -134,10 +134,10 @@ antlion(app, {
 ```
 
 6. Hide a link into **Antlion**'s pit somewhere on your site, ideally hidden so regular users will not notice it.
-   - This trapped link should be one of the trapped routes, optionally followed by random text.
+   - This trapped link should be one of the trapped routes, optionally followed by some random text. _(May make it harder to evade)_
    - Ex: `/trap/abcdef`, or just `/trap`
 
-_NOTE: To avoid strain on your server, Antlion can be installed on another webserver, and linked to from your main site._
+_⚠️ NOTE: If you’re running a high-traffic site, consider hosting **Antlion** on a separate server and linking to it to avoid performance hits._
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
