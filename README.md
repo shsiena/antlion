@@ -72,7 +72,7 @@ For too long, AI companies have been flagrantly disrespecting website owners by 
 - Bots that ignore your site's `robots.txt` and enter **Antlion**'s pit are locked in an infinitely deep site full of nonsensical garbled text which loads at the speed of a '90s dial-up connection.
 - Once bots wait upwards of 20 seconds for a page to finally load, they are presented with several links, each of which leads deeper into **Antlion**'s pit. 
 
-- **Antlion** also automatically handles your robots.txt, adding disallow entries for all trapped routes to ensure ethical bots and search engine indexers are not affected without any additional overhead.
+- **Antlion** also automatically handles serving your `robots.txt`, injecting disallow entries for all trapped routes so ethical bots and search engine indexers skip them automatically — _no extra config needed_.
 
 - Any malicious webscrapers gathering data to compile datasets for training LLMs will inadvertently digest millions of lines of useless text, ruining the output of models trained with this data, ideally making bot owners think twice before ignoring the rules in your sacred `robots.txt`.
 
